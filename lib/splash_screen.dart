@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'auth_screens/create_account_screen.dart';
 import 'feature_screens/main_layout_screen.dart';
 import 'managers/theme_manager.dart';
+import 'on_boarding.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  final bool seenOnboarding;
+  const SplashScreen({super.key, required this.seenOnboarding});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -16,25 +17,32 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    Future.delayed(const Duration(seconds: 3), () {
-      _checkUserAndNavigate();
-    });
+    _startSplashAndNavigate();
   }
 
-  void _checkUserAndNavigate() {
-    final user = FirebaseAuth.instance.currentUser;
-    if (context.mounted) {
+  void _startSplashAndNavigate() {
+    Future.delayed(const Duration(seconds: 3), () {
+      if (!mounted) return;
+
+      final user = FirebaseAuth.instance.currentUser;
+
       if (user != null) {
-        Navigator.of(context).pushReplacement(
+        Navigator.pushReplacement(
+          context,
           MaterialPageRoute(builder: (context) => const MainLayoutScreen()),
         );
-      } else {
-        Navigator.of(context).pushReplacement(
+      } else if (widget.seenOnboarding) {
+        Navigator.pushReplacement(
+          context,
           MaterialPageRoute(builder: (context) => const CreateAccountScreen()),
         );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+        );
       }
-    }
+    });
   }
 
   @override
@@ -46,20 +54,13 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset("images/logo2.png", height: 200, width: 200),
-
             const SizedBox(height: 16),
-
             Text(
               "They grow fast. Pass it on.",
-              style: TextStyle(
-                fontSize: 20,
-                color: ThemeManager.primaryTeal,
-                //letterSpacing: 1.2,
-              ),
+              style: TextStyle(fontSize: 20, color: ThemeManager.primaryTeal),
             ),
             const SizedBox(height: 20),
-
-            CircularProgressIndicator(color: ThemeManager.primaryYellow),
+            const CircularProgressIndicator(color: ThemeManager.primaryYellow),
           ],
         ),
       ),

@@ -2,23 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:kids_loop/splash_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(MyApp());
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+
+  bool seenOnboarding = prefs.getBool('seenOnboarding') ?? false;
+
+  runApp(MyApp(seenOnboarding: seenOnboarding));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool seenOnboarding;
+
+  const MyApp({super.key, required this.seenOnboarding});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeManager.applicationTheme,
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      theme: ThemeManager.applicationTheme,
+      home: SplashScreen(seenOnboarding: seenOnboarding),
     );
   }
 }
