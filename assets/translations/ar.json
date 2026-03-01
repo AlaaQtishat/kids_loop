@@ -1,0 +1,69 @@
+{
+  "splash": {
+    "tagline": "بكبروا بسرعة… خلّي غيرهم يستفيد"
+  },
+  "onboarding_screen": {
+    "title_1": "بكبروا بسرعة!",
+    "subtitle_1": "بيع واشتري ملابس، ألعاب، ومستلزمات أطفال مستعملة بحالة ممتازة لحد عمر 12 سنة.",
+
+    "title_2": "رتّب خزانتهم واطلع بمصاري",
+    "subtitle_2": "اعطي الأغراض اللي كبروا عليها أولادك حياة جديدة. صوّرها، نزّلها، واكسب مصاري زيادة.",
+
+    "title_3": "تسوّق بذكاء ووفّر",
+    "subtitle_3": "اكتشف عروض حلوة من أمهات وآباء حواليك. مفيد لجيبك… وأحسن للبيئة ",
+
+    "back_button": "رجوع",
+    "continue_button": "متابعة",
+    "get_started_button": "ابدأ الآن",
+    "skip_button": "تخطي"
+  },
+  "create_account_screen": {
+    "success_message": "تم إنشاء الحساب بنجاح!",
+    "fail_message": "فشل إنشاء الحساب",
+    "title": "حساب جديد",
+    "subtitle": "سجلي معنا وخلينا نبلّش!",
+    "full_name_hint": "الاسم الكامل",
+    "full_name_error": "*الاسم الكامل مطلوب",
+    "email_hint": "الإيميل",
+    "email_error_empty": "*الإيميل مطلوب",
+    "email_error_invalid": "الرجاء إدخال إيميل صحيح (مثل name@example.com)",
+    "phone_hint": "رقم التلفون (07xxxxxxxx)",
+    "phone_error_empty": "*رقم التلفون مطلوب",
+    "phone_error_invalid": "دخلي رقم أردني صحيح (07xxxxxxxx)",
+    "password_hint": "كلمة السر",
+    "password_error_empty": "*كلمة السر مطلوبة",
+    "password_error_length": "كلمة السر لازم تكون 6 أحرف أو أكثر",
+    "confirm_password_hint": "تأكيد كلمة السر",
+    "confirm_password_error_empty": "*تأكيد كلمة السر مطلوب",
+    "confirm_password_error_match": "كلمات السر مش متطابقة",
+    "sign_up_button": "إنشاء حساب",
+    "already_have_account": "عندك حساب من أول؟ ",
+    "log_in_button": "تسجيل الدخول"
+  },
+  "login_screen": {
+    "fail_message": "فشل تسجيل الدخول",
+    "title": "نورتينا من جديد!",
+    "subtitle": "سجلي دخولك عشان نكمل",
+    "email_hint": "الإيميل",
+    "email_error_empty": "*الإيميل مطلوب",
+    "email_error_invalid": "الرجاء إدخال إيميل صحيح (مثل name@example.com)",
+    "password_hint": "كلمة السر",
+    "password_error_empty": "*كلمة السر مطلوبة",
+    "password_error_length": "كلمة السر لازم تكون 6 أحرف أو أكثر",
+    "forgot_password": "نسيتي كلمة السر؟",
+    "log_in_button": "تسجيل الدخول",
+    "no_account": "ما عندك حساب؟ ",
+    "create_account_button": "سجلي معنا"
+  },
+  "forgot_password_screen": {
+    "success_message": "بعتنالك رابط التعديل! شيّكي على إيميلك.",
+    "fail_message": "صارت مشكلة واحنا بنبعث الإيميل",
+    "title": "نسيتي كلمة السر؟",
+    "subtitle": "ولا يهمك، بتصير! بس دخلي إيميلك عشان نبعتلك رابط تغيري فيه كلمة السر.",
+    "email_hint": "الإيميل",
+    "email_error_empty": "*الإيميل مطلوب",
+    "email_error_invalid": "الرجاء إدخال إيميل صحيح (مثل name@example.com)",
+    "send_button": "ابعت الرابط"
+  }
+
+}

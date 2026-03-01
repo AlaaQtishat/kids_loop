@@ -1,0 +1,64 @@
+{"splash": {
+  "tagline": "They grow fast. Pass it on."
+},
+  "onboarding_screen": {
+    "title_1": "They Grow Up Fast!",
+    "subtitle_1": "Buy and sell gently used clothes, toys, and gear for kids up to 12 years old.",
+    "title_2": "Declutter & Earn",
+    "subtitle_2": "Give outgrown items a second life. Snap a photo, post it in seconds, and make extra cash.",
+    "title_3": "Shop Smart, Save the Planet",
+    "subtitle_3": "Find amazing deals from local parents. Good for your wallet, great for the environment!",
+    "back_button": "Back",
+    "continue_button": "Continue",
+    "get_started_button": "Get Started",
+    "skip_button": "Skip"
+  },
+  "create_account_screen": {
+    "success_message": "Account Created Successfully!",
+    "fail_message": "Registration failed",
+    "title": "Create Account",
+    "subtitle": "Sign up to get started!",
+    "full_name_hint": "Full Name",
+    "full_name_error": "*Full name is required",
+    "email_hint": "Email",
+    "email_error_empty": "*Email is required",
+    "email_error_invalid": "Please enter a valid email (e.g. name@example.com)",
+    "phone_hint": "Phone Number (07xxxxxxxx)",
+    "phone_error_empty": "*Phone Number is required",
+    "phone_error_invalid": "Enter a valid JO number (07xxxxxxxx)",
+    "password_hint": "Password",
+    "password_error_empty": "*Password is required",
+    "password_error_length": "Password must be at least 6 characters",
+    "confirm_password_hint": "Confirm Password",
+    "confirm_password_error_empty": "*Confirmation is required",
+    "confirm_password_error_match": "Passwords do not match",
+    "sign_up_button": "SIGN UP",
+    "already_have_account": "Already have an account? ",
+    "log_in_button": "Log In"
+  },
+  "login_screen": {
+    "fail_message": "Login failed",
+    "title": "Welcome Back!",
+    "subtitle": "Log in to continue",
+    "email_hint": "Email",
+    "email_error_empty": "*Email is required",
+    "email_error_invalid": "Please enter a valid email (e.g. name@example.com)",
+    "password_hint": "Password",
+    "password_error_empty": "*Password is required",
+    "password_error_length": "Password must be at least 6 characters",
+    "forgot_password": "Forgot Password?",
+    "log_in_button": "LOG IN",
+    "no_account": "Don't have an account? ",
+    "create_account_button": "Create Account"
+  },
+  "forgot_password_screen": {
+    "success_message": "Reset link sent! Check your email.",
+    "fail_message": "Error sending email",
+    "title": "Forgot Password?",
+    "subtitle": "Don't worry! It happens. Please enter your email address to receive a reset link.",
+    "email_hint": "Email",
+    "email_error_empty": "*Email is required",
+    "email_error_invalid": "Please enter a valid email (e.g. name@example.com)",
+    "send_button": "SEND RESET LINK"
+  }
+}
