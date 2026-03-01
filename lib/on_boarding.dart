@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,26 +16,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
   final Color subtitleColor = Colors.grey.shade600;
-  final List<Map<String, String>> _onboardingData = [
-    {
-      "title": "They Grow Up Fast!",
-      "subtitle":
-          "Buy and sell gently used clothes, toys, and gear for kids up to 12 years old.",
-      "image": "images/onboarding1.png",
-    },
-    {
-      "title": "Declutter & Earn",
-      "subtitle":
-          "Give outgrown items a second life. Snap a photo, post it in seconds, and make extra cash.",
-      "image": "images/onboarding2.png",
-    },
-    {
-      "title": "Shop Smart, Save the Planet",
-      "subtitle":
-          "Find amazing deals from local parents. Good for your wallet, great for the environment!",
-      "image": "images/onboarding3.png",
-    },
-  ];
 
   void _completeOnboarding(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -50,6 +31,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> _onboardingData = [
+      {
+        "title": "onboarding_screen.title_1".tr(),
+        "subtitle": "onboarding_screen.subtitle_1".tr(),
+        "image": "assets/images/onboarding1.png",
+      },
+      {
+        "title": "onboarding_screen.title_2".tr(),
+        "subtitle": "onboarding_screen.subtitle_2".tr(),
+        "image": "assets/images/onboarding2.png",
+      },
+      {
+        "title": "onboarding_screen.title_3".tr(),
+        "subtitle": "onboarding_screen.subtitle_3".tr(),
+        "image": "assets/images/onboarding3.png",
+      },
+    ];
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ThemeManager.backgroundGrey,
@@ -168,7 +166,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   ),
                                 ),
                                 child: Text(
-                                  "Back",
+                                  "onboarding_screen.back_button".tr(),
                                   style: TextStyle(
                                     color: ThemeManager.primaryTeal,
                                     fontSize: 16,
@@ -218,8 +216,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               ),
                               child: Text(
                                 _currentPage == _onboardingData.length - 1
-                                    ? "Get Started"
-                                    : "Continue",
+                                    ? "onboarding_screen.get_started_button"
+                                          .tr()
+                                    : "onboarding_screen.continue_button".tr(),
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -239,7 +238,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
           SafeArea(
             child: Align(
-              alignment: Alignment.topRight,
+              alignment: AlignmentDirectional.topEnd,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: InkWell(
@@ -261,7 +260,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                     child: Text(
-                      "Skip",
+                      "onboarding_screen.skip_button".tr(),
                       style: TextStyle(
                         color: ThemeManager.primaryTeal,
                         fontSize: 14,

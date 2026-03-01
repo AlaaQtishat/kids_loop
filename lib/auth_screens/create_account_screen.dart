@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -39,10 +40,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Account Created Successfully!"),
+            SnackBar(
+              content: const Text("create_account_screen.success_message").tr(),
               backgroundColor: ThemeManager.successGreen,
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
             ),
           );
 
@@ -54,7 +55,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.message ?? "Registration failed"),
+              content: Text(
+                e.message ?? "create_account_screen.fail_message".tr(),
+              ),
               backgroundColor: ThemeManager.errorRed,
             ),
           );
@@ -87,48 +90,48 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(height: 30),
-                Image.asset("images/logo2.png", height: 160),
-                const Text(
-                  "Create Account",
+                Image.asset("assets/images/logo2.png", height: 160),
+                Text(
+                  "create_account_screen.title".tr(),
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: ThemeManager.primaryTeal,
                   ),
                 ),
-                const Text(
-                  "Sign up to get started!",
+                Text(
+                  "create_account_screen.subtitle".tr(),
                   style: TextStyle(color: Colors.grey),
                 ),
                 const SizedBox(height: 16),
 
                 CustomTextField(
-                  hint: "Full Name",
+                  hint: "create_account_screen.full_name_hint".tr(),
                   prefixIcon: Icons.person,
                   controller: _nameController,
                   validator: (val) {
                     if (val == null || val.isEmpty)
-                      return "*Full name is required";
+                      return "create_account_screen.full_name_error".tr();
                     return null;
                   },
                 ),
 
                 CustomTextField(
-                  hint: "Email",
+                  hint: "create_account_screen.email_hint".tr(),
                   prefixIcon: Icons.email,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
 
                   validator: (val) {
                     if (val == null || val.isEmpty) {
-                      return "*Email is required";
+                      return "create_account_screen.email_error_empty".tr();
                     }
                     final bool emailValid = RegExp(
                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                     ).hasMatch(val);
 
                     if (!emailValid) {
-                      return "Please enter a valid email (e.g. name@example.com)";
+                      return "create_account_screen.email_error_invalid".tr();
                     }
 
                     return null;
@@ -136,20 +139,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
 
                 CustomTextField(
-                  hint: "Phone Number (07xxxxxxxx)",
+                  hint: "create_account_screen.phone_hint".tr(),
                   prefixIcon: Icons.phone_android,
                   controller: _phoneController,
                   keyboardType: TextInputType.phone,
                   validator: (val) {
                     if (val == null || val.isEmpty) {
-                      return "Phone Number is required";
+                      return "create_account_screen.phone_error_empty".tr();
                     }
                     final bool numberValid = RegExp(
                       r'^(07[789]\d{7})$',
                     ).hasMatch(val);
 
                     if (!numberValid) {
-                      return "Enter a valid JO number (07xxxxxxxx)";
+                      return "create_account_screen.phone_error_invalid".tr();
                     }
 
                     return null;
@@ -157,30 +160,32 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 ),
 
                 CustomTextField(
-                  hint: "Password",
+                  hint: "create_account_screen.password_hint".tr(),
                   prefixIcon: Icons.lock,
                   controller: _passwordController,
                   isPassword: true,
                   validator: (val) {
                     if (val == null || val.isEmpty)
-                      return "*Password is required";
+                      return "create_account_screen.password_error_empty".tr();
                     if (val.length < 6)
-                      return "Password must be at least 6 characters";
+                      return "create_account_screen.password_error_length".tr();
                     return null;
                   },
                 ),
 
                 CustomTextField(
-                  hint: "Confirm Password",
+                  hint: "create_account_screen.confirm_password_hint".tr(),
                   prefixIcon: Icons.lock_outline,
                   controller: _confirmPasswordController,
                   isPassword: true,
                   validator: (val) {
                     if (val == null || val.isEmpty)
-                      return "*Confirmation is required";
+                      return "create_account_screen.confirm_password_error_empty"
+                          .tr();
                     if (_passwordController.text !=
                         _confirmPasswordController.text)
-                      return "Password do not match";
+                      return "create_account_screen.confirm_password_error_match"
+                          .tr();
 
                     return null;
                   },
@@ -196,8 +201,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
                     child: isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                            "SIGN UP",
+                        : Text(
+                            "create_account_screen.sign_up_button".tr(),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -210,7 +215,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have an account? "),
+                    const Text(
+                      "create_account_screen.already_have_account",
+                    ).tr(),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
@@ -221,13 +228,13 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       },
 
                       child: const Text(
-                        "Log In",
+                        "create_account_screen.log_in_button",
                         style: TextStyle(
                           color: ThemeManager.primaryYellow,
 
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                      ).tr(),
                     ),
                   ],
                 ),

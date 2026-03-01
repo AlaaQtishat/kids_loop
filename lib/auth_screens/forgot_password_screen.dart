@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -28,8 +29,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text("Reset link sent! Check your email."),
+            SnackBar(
+              content: Text("forgot_password_screen.success_message").tr(),
               backgroundColor: ThemeManager.successGreen,
             ),
           );
@@ -40,7 +41,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.message ?? "Error sending email"),
+              content: Text(
+                e.message ?? "forgot_password_screen.fail_message".tr(),
+              ),
               backgroundColor: ThemeManager.errorRed,
             ),
           );
@@ -77,10 +80,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             children: [
               const SizedBox(height: 80),
 
-              Image.asset("images/logo2.png", height: 150),
+              Image.asset("assets/images/logo2.png", height: 150),
 
-              const Text(
-                "Forgot Password?",
+              Text(
+                "forgot_password_screen.title".tr(),
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -90,8 +93,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
               const SizedBox(height: 12),
 
-              const Text(
-                "Don't worry! It happens. Please enter your email address to receive a reset link.",
+              Text(
+                "forgot_password_screen.subtitle".tr(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
@@ -99,20 +102,20 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               const SizedBox(height: 32),
 
               CustomTextField(
-                hint: "Email",
+                hint: "forgot_password_screen.email_hint".tr(),
                 prefixIcon: Icons.email,
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 validator: (val) {
                   if (val == null || val.isEmpty) {
-                    return "*Email is required";
+                    return "forgot_password_screen.email_error_empty".tr();
                   }
                   final bool emailValid = RegExp(
                     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                   ).hasMatch(val);
 
                   if (!emailValid) {
-                    return "Please enter a valid email (e.g. name@example.com)";
+                    return "forgot_password_screen.email_error_invalid".tr();
                   }
 
                   return null;
@@ -129,8 +132,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                   child: isLoading
                       ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text(
-                          "SEND RESET LINK",
+                      : Text(
+                          "forgot_password_screen.send_button".tr(),
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,

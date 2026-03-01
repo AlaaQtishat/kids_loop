@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../feature_screens/main_layout_screen.dart';
@@ -41,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.message ?? "Login failed"),
+              content: Text(e.message ?? "login_screen.fail_message".tr()),
               backgroundColor: ThemeManager.errorRed,
             ),
           );
@@ -75,9 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 SizedBox(height: 80),
 
-                Image.asset("images/logo2.png", height: 180, width: 200),
-                const Text(
-                  "Welcome Back!",
+                Image.asset("assets/images/logo2.png", height: 180, width: 200),
+                Text(
+                  "login_screen.title".tr(),
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -85,28 +86,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 8),
-                const Text(
-                  "Log in to continue",
+                Text(
+                  "login_screen.subtitle".tr(),
                   style: TextStyle(color: Colors.grey),
                 ),
                 const SizedBox(height: 32),
 
                 CustomTextField(
-                  hint: "Email",
+                  hint: "login_screen.email_hint".tr(),
                   prefixIcon: Icons.email,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
 
                   validator: (val) {
                     if (val == null || val.isEmpty) {
-                      return "*Email is required";
+                      return "login_screen.email_error_empty".tr();
                     }
                     final bool emailValid = RegExp(
                       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
                     ).hasMatch(val);
 
                     if (!emailValid) {
-                      return "Please enter a valid email (e.g. name@example.com)";
+                      return "login_screen.email_error_invalid".tr();
                     }
 
                     return null;
@@ -114,15 +115,15 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 CustomTextField(
-                  hint: "Password",
+                  hint: "login_screen.password_hint".tr(),
                   prefixIcon: Icons.lock,
                   controller: _passwordController,
                   isPassword: true,
                   validator: (val) {
                     if (val == null || val.isEmpty)
-                      return "*Password is required";
+                      return "login_screen.password_error_empty".tr();
                     if (val.length < 6)
-                      return "Password must be at least 6 characters";
+                      return "login_screen.password_error_length".tr();
                     return null;
                   },
                 ),
@@ -138,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       );
                     },
-                    child: const Text(
-                      "Forgot Password?",
+                    child: Text(
+                      "login_screen.forgot_password".tr(),
                       style: TextStyle(
                         color: ThemeManager.primaryYellow,
                         fontWeight: FontWeight.bold,
@@ -158,8 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     child: isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
-                            "LOG IN",
+                        : Text(
+                            "login_screen.log_in_button".tr(),
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -174,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Don't have an account? "),
+                    Text("login_screen.no_account").tr(),
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacement(
@@ -183,8 +184,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         );
                       },
-                      child: const Text(
-                        "Create Account",
+                      child: Text(
+                        "login_screen.create_account_button".tr(),
                         style: TextStyle(
                           color: ThemeManager.primaryYellow,
                           fontWeight: FontWeight.bold,
