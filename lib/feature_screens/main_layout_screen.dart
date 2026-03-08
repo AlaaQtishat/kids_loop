@@ -23,50 +23,37 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
   ];
 
   final List<String> _screenTitles = ["Home", "Explore", "Chats", "My Profile"];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFF5F5F5),
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        scrolledUnderElevation: 0,
-        surfaceTintColor: Colors.transparent,
-        backgroundColor: ThemeManager.backgroundGrey,
-        actions: _currentIndex == 0
-            ? [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: IconButton(
-                    onPressed: () {},
+    final theme = Theme.of(context);
 
-                    icon: const Icon(
-                      Icons.notifications_none_rounded,
-                      color: ThemeManager.primaryTeal,
-                      size: 32,
-                    ),
-                  ),
-                ),
-              ]
-            : null,
+    return Scaffold(
+      appBar: AppBar(
         centerTitle: _currentIndex == 0 ? false : true,
         title: _currentIndex == 0
-            ? Image.asset("images/logo1.png", height: 60, fit: BoxFit.contain)
+            ? Image.asset(
+                "assets/images/logo1.png",
+                height: 60,
+                fit: BoxFit.contain,
+              )
             : Text(
                 _screenTitles[_currentIndex],
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: ThemeManager.primaryTeal,
+                  color: theme.primaryColor,
                 ),
               ),
       ),
 
       body: _screens[_currentIndex],
+
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddProductScreen()),
+            MaterialPageRoute(builder: (context) => const AddProductScreen()),
           );
         },
         backgroundColor: ThemeManager.primaryYellow,
@@ -78,10 +65,9 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
       bottomNavigationBar: BottomAppBar(
         shadowColor: Colors.black54,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
         notchMargin: 8.0,
-        surfaceTintColor: Colors.white,
-        color: Colors.white,
+        color: theme.cardColor,
         elevation: 20,
         child: SizedBox(
           height: 10,
@@ -118,6 +104,11 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
     required int index,
   }) {
     final bool isSelected = _currentIndex == index;
+    final theme = Theme.of(context);
+
+    final Color selectedColor = theme.primaryColor;
+    final Color unselectedColor = Colors.grey.shade600;
+
     return GestureDetector(
       onTap: () => setState(() => _currentIndex = index),
       child: Column(
@@ -126,13 +117,13 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
         children: [
           Icon(
             icon,
-            color: isSelected ? ThemeManager.primaryTeal : Colors.grey,
+            color: isSelected ? selectedColor : unselectedColor,
             size: 26,
           ),
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? ThemeManager.primaryTeal : Colors.grey,
+              color: isSelected ? selectedColor : unselectedColor,
               fontSize: 12,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             ),
