@@ -3,12 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:kids_loop/feature_screens/myListings.dart';
+import 'package:kids_loop/bottom_navigation_pages/profile_screen/myListings.dart';
 import 'package:provider/provider.dart';
 import 'package:kids_loop/auth_screens/login_screen.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
-import '../services/cloudinary_service.dart';
-import '../services/theme_provider.dart';
+import '../../services/cloudinary_service.dart';
+import '../../services/theme_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
