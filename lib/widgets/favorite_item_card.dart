@@ -67,7 +67,7 @@ class FavoriteItemCard extends StatelessWidget {
                     _buildImageSection(imageUrl, isSold),
                     const SizedBox(width: 16),
                     _buildDetailsSection(title, price, isSold),
-                    _buildDeleteButton(context, data, productId), // 🌟 زر الحذف
+                    _buildDeleteButton(context, data, productId),
                   ],
                 ),
               ),
