@@ -18,8 +18,8 @@ class ProductCard extends StatelessWidget {
     final title = data['title'] ?? 'No Title';
     final price = data['price']?.toString() ?? '0.00';
     final condition = data['condition'] ?? 'Unknown Condition';
-    final category = data['category'] ?? 'Category';
-    final ageGroup = data['ageGroup'] ?? 'Age Group';
+    final category = data['category'];
+    final ageGroup = data['ageGroup'];
     final location = data['location'] ?? 'Unknown Location';
     final timeAgo = DateHelper.getTimeAgo(data['createdAt']);
     final String sellerUid = data['userUid'] ?? '';
