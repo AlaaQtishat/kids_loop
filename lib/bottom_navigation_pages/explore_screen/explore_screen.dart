@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kids_loop/bottom_navigation_pages/explore_screen/filtered_products_screen.dart';
+import 'package:kids_loop/managers/theme_manager.dart';
+import 'package:kids_loop/utilities/listing_options.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ExploreScreen extends StatelessWidget {
   ExploreScreen({super.key});
@@ -15,14 +18,38 @@ class ExploreScreen extends StatelessWidget {
     {"name": "Gear", "icon": Icons.stroller, "color": Colors.purpleAccent},
   ];
 
-  final List<String> _ageGroups = [
-    "Newborn (0-3m)",
-    "Infant (3-12m)",
-    "Toddler (1-3y)",
-    "Kids (4-7y)",
-    "Junior (8-12y)",
+  final List<Map<String, dynamic>> _ageGroupsData = [
+    {
+      "dbValue": "Newborn (0-3m)",
+      "title": "Newborn",
+      "subtitle": "0-3 months",
+      "icon": FontAwesomeIcons.babyCarriage,
+    },
+    {
+      "dbValue": "Infant (3-12m)",
+      "title": "Infant",
+      "subtitle": "3-12 months",
+      "icon": FontAwesomeIcons.baby,
+    },
+    {
+      "dbValue": "Toddler (1-3y)",
+      "title": "Toddler",
+      "subtitle": "1-3 years",
+      "icon": FontAwesomeIcons.child,
+    },
+    {
+      "dbValue": "Kids (4-7y)",
+      "title": "Kids",
+      "subtitle": "4-7 years",
+      "icon": FontAwesomeIcons.basketball,
+    },
+    {
+      "dbValue": "Junior (8-12y)",
+      "title": "Junior",
+      "subtitle": "8-12 years",
+      "icon": FontAwesomeIcons.gamepad,
+    },
   ];
-
   final List<Map<String, dynamic>> _genders = const [
     {"name": "Boy", "icon": Icons.male, "color": Colors.blue},
     {"name": "Girl", "icon": Icons.female, "color": Colors.pink},
@@ -95,40 +122,93 @@ class ExploreScreen extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 15),
+            Divider(),
+            const SizedBox(height: 15),
 
             _buildSectionTitle("Shop by Age"),
             const SizedBox(height: 16),
             Wrap(
               spacing: 12,
               runSpacing: 12,
-              children: _ageGroups.map((age) {
+              children: _ageGroupsData.map((age) {
+                double cardWidth =
+                    (MediaQuery.of(context).size.width - 40 - 12) / 2;
+
                 return InkWell(
-                  borderRadius: BorderRadius.circular(12),
-                  onTap: () => _navigateToFilter(context, "ageGroup", age),
+                  borderRadius: BorderRadius.circular(16),
+
+                  onTap: () =>
+                      _navigateToFilter(context, "ageGroup", age["dbValue"]),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
+                    width: cardWidth,
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: theme.cardColor,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: theme.dividerColor),
-                    ),
-                    child: Text(
-                      age,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: theme.textTheme.bodyLarge?.color,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: theme.dividerColor.withOpacity(0.5),
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.02),
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: ThemeManager.primaryTeal.withOpacity(0.1),
+                            shape: BoxShape.circle,
+                          ),
+                          child: FaIcon(
+                            age["icon"],
+                            size: 20,
+                            color: ThemeManager.primaryTeal,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                age["title"],
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: theme.textTheme.bodyLarge?.color,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                age["subtitle"],
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: theme.hintColor,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );
               }).toList(),
             ),
-            const SizedBox(height: 30),
-
+            const SizedBox(height: 15),
+            Divider(),
+            const SizedBox(height: 15),
             _buildSectionTitle("Shop by Gender"),
             const SizedBox(height: 16),
             Row(
@@ -169,6 +249,53 @@ class ExploreScreen extends StatelessWidget {
                   ),
                 );
               }).toList(),
+            ),
+            const SizedBox(height: 15),
+            Divider(),
+            const SizedBox(height: 15),
+            _buildSectionTitle("Shop by Location"),
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 45,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: ListingOptions.locations.length,
+                separatorBuilder: (context, index) => const SizedBox(width: 10),
+                itemBuilder: (context, index) {
+                  final loc = ListingOptions.locations[index];
+                  return InkWell(
+                    borderRadius: BorderRadius.circular(24),
+                    onTap: () => _navigateToFilter(context, "location", loc),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        color: theme.cardColor,
+                        borderRadius: BorderRadius.circular(24),
+                        border: Border.all(
+                          color: ThemeManager.primaryTeal.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_outlined,
+                            size: 18,
+                            color: ThemeManager.primaryTeal,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            loc,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: theme.textTheme.bodyLarge?.color,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
 
             const SizedBox(height: 80),
