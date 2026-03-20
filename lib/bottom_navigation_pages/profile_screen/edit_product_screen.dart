@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
+import 'package:kids_loop/utilities/listing_options.dart';
 
 class EditProductScreen extends StatefulWidget {
   final QueryDocumentSnapshot productDoc;
@@ -17,29 +18,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   late TextEditingController _titleController;
   late TextEditingController _priceController;
   late TextEditingController _descController;
-  late TextEditingController _locController;
 
   String? _selectedCategory;
   String? _selectedCondition;
   String? _selectedAgeGroup;
   String? _selectedGender;
-
-  final List<String> _categories = ["Clothes", "Shoes", "Toys", "Gear"];
-  final List<String> _conditions = [
-    "New with Tag",
-    "Like New",
-    "Used - Good",
-    "Used - Fair",
-  ];
-  final List<String> _ageGroups = [
-    "Newborn (0-3m)",
-    "Infant (3-12m)",
-    "Toddler (1-3y)",
-    "Kids (4-7y)",
-    "Junior (8-12y)",
-  ];
-
-  final List<String> _genders = ["Boy", "Girl", "Neutral"];
+  String? _selectedLocation;
 
   bool _isUpdating = false;
 
@@ -51,12 +35,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _titleController = TextEditingController(text: data['title']);
     _priceController = TextEditingController(text: data['price'].toString());
     _descController = TextEditingController(text: data['description']);
-    _locController = TextEditingController(text: data['location']);
 
     _selectedCategory = data['category'];
     _selectedCondition = data['condition'];
     _selectedAgeGroup = data['ageGroup'];
     _selectedGender = data['gender'];
+    _selectedLocation = data['location'];
   }
 
   @override
@@ -64,7 +48,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _titleController.dispose();
     _priceController.dispose();
     _descController.dispose();
-    _locController.dispose();
+
     super.dispose();
   }
 
@@ -85,7 +69,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             'condition': _selectedCondition,
             'ageGroup': _selectedAgeGroup,
             'gender': _selectedGender,
-            'location': _locController.text.trim(),
+            'location': _selectedLocation,
           });
 
       if (mounted) {
@@ -114,7 +98,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Edit Listing"), centerTitle: true),
+      appBar: AppBar(
+        title: const Text(
+          "Edit Listing",
+          style: TextStyle(color: ThemeManager.primaryTeal),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Form(
@@ -132,14 +122,30 @@ class _EditProductScreenState extends State<EditProductScreen> {
               ),
               const SizedBox(height: 16),
 
-              TextFormField(
-                controller: _priceController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: "Price (JOD)",
-                  border: OutlineInputBorder(),
-                ),
-                validator: (val) => val!.isEmpty ? "Required" : null,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _priceController,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: "Price (JOD)",
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (val) => val!.isEmpty ? "Required" : null,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: _buildDropdown(
+                      label: "Location",
+                      value: _selectedLocation,
+                      items: ListingOptions.locations,
+                      onChanged: (val) =>
+                          setState(() => _selectedLocation = val as String),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 16),
 
@@ -149,7 +155,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: _buildDropdown(
                       label: "Category",
                       value: _selectedCategory,
-                      items: _categories,
+                      items: ListingOptions.categories,
                       onChanged: (val) =>
                           setState(() => _selectedCategory = val as String),
                     ),
@@ -159,7 +165,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: _buildDropdown(
                       label: "Condition",
                       value: _selectedCondition,
-                      items: _conditions,
+                      items: ListingOptions.conditions,
                       onChanged: (val) =>
                           setState(() => _selectedCondition = val as String),
                     ),
@@ -174,7 +180,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: _buildDropdown(
                       label: "Age Group",
                       value: _selectedAgeGroup,
-                      items: _ageGroups,
+                      items: ListingOptions.ageGroups,
                       onChanged: (val) =>
                           setState(() => _selectedAgeGroup = val as String),
                     ),
@@ -184,7 +190,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: _buildDropdown(
                       label: "Gender",
                       value: _selectedGender,
-                      items: _genders,
+                      items: ListingOptions.genders,
                       onChanged: (val) =>
                           setState(() => _selectedGender = val as String),
                     ),
@@ -201,19 +207,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(height: 16),
-              TextFormField(
-                controller: _locController,
-                maxLines: 1,
-                decoration: const InputDecoration(
-                  labelText: "Location",
-                  border: OutlineInputBorder(),
-                ),
-              ),
+
               const SizedBox(height: 30),
               SizedBox(
                 width: double.infinity,
-                height: 50,
+                height: 65,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ThemeManager.primaryTeal,

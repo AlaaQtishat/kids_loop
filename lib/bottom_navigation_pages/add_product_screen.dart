@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
-import '../services/cloudinary_service.dart';
+import 'package:kids_loop/services/cloudinary_service.dart';
+import 'package:kids_loop/utilities/listing_options.dart';
 
 class AddProductScreen extends StatefulWidget {
   const AddProductScreen({super.key});
@@ -20,30 +21,14 @@ class _AddProductScreenState extends State<AddProductScreen> {
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
   final _descController = TextEditingController();
-  final _locationController = TextEditingController();
+
   bool _isLoading = false;
 
   String? _selectedCategory;
   String? _selectedCondition;
   String? _selectedAgeGroup;
   String? _selectedGender;
-
-  final List<String> _categories = ["Clothes", "Shoes", "Toys", "Gear"];
-  final List<String> _conditions = [
-    "New with Tag",
-    "Like New",
-    "Used - Good",
-    "Used - Fair",
-  ];
-  final List<String> _ageGroups = [
-    "Newborn (0-3m)",
-    "Infant (3-12m)",
-    "Toddler (1-3y)",
-    "Kids (4-7y)",
-    "Junior (8-12y)",
-  ];
-
-  final List<String> _genders = ["Boy", "Girl", "Unisex / Neutral"];
+  String? _selectedLocation;
 
   Future<void> _pickImages() async {
     final List<XFile> images = await _picker.pickMultiImage(
@@ -151,7 +136,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         _buildDropdown(
                           hint: "Select",
                           value: _selectedCategory,
-                          items: _categories,
+                          items: ListingOptions.categories,
                           onChanged: (val) =>
                               setState(() => _selectedCategory = val),
                         ),
@@ -169,9 +154,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       children: [
                         _buildSectionTitle("Condition"),
                         _buildDropdown(
-                          hint: "Condition",
+                          hint: "Select",
                           value: _selectedCondition,
-                          items: _conditions,
+                          items: ListingOptions.conditions,
                           onChanged: (val) =>
                               setState(() => _selectedCondition = val),
                         ),
@@ -185,9 +170,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       children: [
                         _buildSectionTitle("Age Group"),
                         _buildDropdown(
-                          hint: "Age",
+                          hint: "Select",
                           value: _selectedAgeGroup,
-                          items: _ageGroups,
+                          items: ListingOptions.ageGroups,
                           onChanged: (val) =>
                               setState(() => _selectedAgeGroup = val),
                         ),
@@ -205,9 +190,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       children: [
                         _buildSectionTitle("Gender"),
                         _buildDropdown(
-                          hint: "Select Gender",
+                          hint: "Select",
                           value: _selectedGender,
-                          items: _genders,
+                          items: ListingOptions.genders,
                           onChanged: (val) =>
                               setState(() => _selectedGender = val),
                         ),
@@ -215,7 +200,21 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     ),
                   ),
                   const SizedBox(width: 16),
-                  const Expanded(child: SizedBox()),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildSectionTitle("Location"),
+                        _buildDropdown(
+                          hint: "Select",
+                          value: _selectedLocation,
+                          items: ListingOptions.locations,
+                          onChanged: (val) =>
+                              setState(() => _selectedLocation = val),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
 
@@ -225,13 +224,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 hint: "Describe your item...",
                 icon: Icons.description_outlined,
                 maxLines: 4,
-              ),
-
-              _buildSectionTitle("Location"),
-              _buildTextField(
-                controller: _locationController,
-                hint: "Amman, Khalda...",
-                icon: Icons.location_on_outlined,
               ),
 
               const SizedBox(height: 30),
@@ -262,7 +254,20 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               final currentUser =
                                   FirebaseAuth.instance.currentUser;
                               final currentUid = currentUser?.uid;
-                              final currentName = currentUser?.displayName;
+
+                              String sellerName = "KidsLoop User";
+
+                              if (currentUid != null) {
+                                final userDoc = await FirebaseFirestore.instance
+                                    .collection("users")
+                                    .doc(currentUid)
+                                    .get();
+                                if (userDoc.exists) {
+                                  sellerName =
+                                      userDoc.data()?['full_name'] ??
+                                      "KidsLoop User";
+                                }
+                              }
 
                               List<String> uploadedImageUrls = [];
                               for (var imageFile in _selectedImages) {
@@ -290,10 +295,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                     "ageGroup": _selectedAgeGroup,
                                     "gender": _selectedGender,
                                     "description": _descController.text.trim(),
-                                    "location": _locationController.text.trim(),
+                                    "location": _selectedLocation,
                                     "images": uploadedImageUrls,
                                     "userUid": currentUid,
-                                    "sellerName": currentName,
+                                    "sellerName": sellerName,
                                     "createdAt": DateTime.now()
                                         .toIso8601String(),
                                     "status": "available",
@@ -304,7 +309,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: const Text(
-                                      "Item posted successfully! 🎉",
+                                      "Item posted successfully! ",
                                     ),
                                     backgroundColor: Colors.grey[900],
                                   ),
@@ -313,7 +318,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                 _titleController.clear();
                                 _priceController.clear();
                                 _descController.clear();
-                                _locationController.clear();
 
                                 setState(() {
                                   _selectedCategory = null;
@@ -321,6 +325,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                                   _selectedAgeGroup = null;
                                   _selectedGender = null;
                                   _selectedImages.clear();
+                                  _selectedLocation = null;
                                 });
                                 Navigator.pop(context);
                               }
