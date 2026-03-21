@@ -64,6 +64,127 @@
     "email_error_empty": "*الإيميل مطلوب",
     "email_error_invalid": "الرجاء إدخال إيميل صحيح (مثل name@example.com)",
     "send_button": "ابعت الرابط"
-  }
+  },
+  "home_screen": {
+  "home_error": "حدث خطأ: ",
+  "home_no_items": "لا توجد عناصر متاحة بعد.",
+  "home_no_other_items": "لا توجد عناصر جديدة من مستخدمين آخرين بعد."
+  },
+  "listing_options": {
+    "Clothes": "ملابس",
+    "Shoes": "أحذية",
+    "Toys": "ألعاب",
+    "Gear": "معدات",
 
+    "New with Tag": "جديد بالبطاقة",
+    "Like New": "شبه جديد",
+    "Used - Good": "مستعمل - جيد",
+    "Used - Fair": "مستعمل - مقبول",
+
+    "Newborn (0-3m)": "حديثي الولادة (0-3 شهور)",
+    "Infant (3-12m)": "رُضّع (3-12 شهر)",
+    "Toddler (1-3y)": "أطفال صغار (1-3 سنوات)",
+    "Kids (4-7y)": "أطفال (4-7 سنوات)",
+    "Junior (8-12y)": "يافعين (8-12 سنة)",
+
+    "Boy": "ولادي",
+    "Girl": "بناتي",
+    "Neutral": "للجنسين",
+
+    "Amman": "عمان",
+    "Irbid": "إربد",
+    "Zarqa": "الزرقاء",
+    "Mafraq": "المفرق",
+    "Balqa": "البلقاء",
+    "Madaba": "مادبا",
+    "Jerash": "جرش",
+    "Ajloun": "عجلون",
+    "Karak": "الكرك",
+    "Tafilah": "الطفيلة",
+    "Ma'an": "معان",
+    "Aqaba": "العقبة"
+  },
+  "add_product_screen": {
+    "app_bar_title": "بيع غرض",
+    "image_limit_warning": "بتقدري تختاري 3 صور كحد أقصى. تم إزالة الصور الزيادة.",
+    "photos_section": "الصور (لحد 3)",
+    "title_section": "العنوان",
+    "title_hint": "شو بتبيعي؟ (مثلاً: جاكيت زارا)",
+    "price_section": "السعر (دينار)",
+    "category_section": "القسم",
+    "condition_section": "الحالة",
+    "age_group_section": "الفئة العمرية",
+    "gender_section": "الجنس",
+    "location_section": "الموقع",
+    "dropdown_hint": "اختاري",
+    "desc_section": "الوصف",
+    "desc_hint": "اكتبي تفاصيل عن الغرض...",
+    "no_photo_warning": "الرجاء إضافة صورة واحدة على الأقل",
+    "success_message": "تم نشر الإعلان بنجاح!",
+    "error_prefix": "حدث خطأ: ",
+    "post_button": "انشر الإعلان",
+    "required_validation": "مطلوب",
+    "tap_to_upload": "اضغطي لرفع الصور"
+  },
+  "explore_screen": {
+    "shop_by_category": "تسوّق حسب القسم",
+    "shop_by_age": "تسوّق حسب العمر",
+    "shop_by_gender": "تسوّق حسب الجنس",
+    "shop_by_location": "تسوّق حسب الموقع",
+
+    "Newborn (0-3m)": "حديثي الولادة (0-3 شهور)",
+    "Infant": "رُضّع",
+    "Toddler": "أطفال صغار",
+    "Kids": "أطفال",
+    "Junior": "يافعين",
+
+    "0-3 months": "0-3 شهور",
+    "3-12 months": "3-12 شهر",
+    "1-3 years": "1-3 سنوات",
+    "4-7 years": "4-7 سنوات",
+    "8-12 years": "8-12 سنة"
+  },"filtered_products_screen": {
+  "error": "حدث خطأ: ",
+  "no_items_found": "لا توجد عناصر متاحة لـ",
+  "no_title": "بدون عنوان",
+  "currency": "دينار"
+},
+  "product_card": {
+    "no_title": "بدون عنوان",
+    "unknown_condition": "الحالة غير معروفة",
+    "unknown_location": "الموقع غير معروف",
+    "loading": "جاري التحميل...",
+    "unknown_seller": "بائع غير معروف",
+    "currency_jd": "دينار"
+  },"date_helper": {
+  "just_now": "الآن",
+  "posted_days_ago": "منذ {days} يوم",
+  "posted_hours_ago": "منذ {hours} ساعة",
+  "posted_minutes_ago": "منذ {minutes} دقيقة"
+},"product_details_screen": {
+  "no_title": "بدون عنوان",
+  "unknown_location": "الموقع غير معروف",
+  "unknown": "غير معروف",
+  "no_description": "لا يوجد وصف.",
+  "currency_jd": "دينار",
+  "condition_label": "الحالة",
+  "age_label": "العمر",
+  "category_label": "القسم",
+  "description_label": "الوصف",
+  "sold_by": "البائع",
+  "loading": "جاري التحميل...",
+  "unknown_seller": "بائع غير معروف",
+  "no_phone": "لا يوجد رقم هاتف",
+  "seller": "البائع",
+  "cannot_chat_with_self": "لا يمكنك التحدث مع نفسك!",
+  "chat_with": "تحدث مع {name}"
+},"main_layout": {
+  "home": "الرئيسية",
+  "explore": "اكتشف",
+  "favorites": "المفضلة",
+  "profile_title": "حسابي",
+  "profile_nav": "حسابي"
 }
+}
+
+

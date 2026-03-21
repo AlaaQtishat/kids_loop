@@ -60,5 +60,122 @@
     "email_error_empty": "*Email is required",
     "email_error_invalid": "Please enter a valid email (e.g. name@example.com)",
     "send_button": "SEND RESET LINK"
-  }
+  },
+  "home_screen": {
+    "home_error": "Error: ",
+    "home_no_items": "No items available yet.",
+    "home_no_other_items": "No new items from others yet."
+  },"listing_options": {
+  "Clothes": "Clothes",
+  "Shoes": "Shoes",
+  "Toys": "Toys",
+  "Gear": "Gear",
+
+  "New with Tag": "New with Tag",
+  "Like New": "Like New",
+  "Used - Good": "Used - Good",
+  "Used - Fair": "Used - Fair",
+
+  "Newborn (0-3m)": "Newborn (0-3m)",
+  "Infant (3-12m)": "Infant (3-12m)",
+  "Toddler (1-3y)": "Toddler (1-3y)",
+  "Kids (4-7y)": "Kids (4-7y)",
+  "Junior (8-12y)": "Junior (8-12y)",
+
+  "Boy": "Boy",
+  "Girl": "Girl",
+  "Neutral": "Neutral",
+
+  "Amman": "Amman",
+  "Irbid": "Irbid",
+  "Zarqa": "Zarqa",
+  "Mafraq": "Mafraq",
+  "Balqa": "Balqa",
+  "Madaba": "Madaba",
+  "Jerash": "Jerash",
+  "Ajloun": "Ajloun",
+  "Karak": "Karak",
+  "Tafilah": "Tafilah",
+  "Ma'an": "Ma'an",
+  "Aqaba": "Aqaba"
+},"add_product_screen": {
+  "app_bar_title": "Sell an Item",
+  "image_limit_warning": "You can only select up to 3 images. Extra images were ignored.",
+  "photos_section": "Photos (Up to 3)",
+  "title_section": "Title",
+  "title_hint": "What are you selling? (e.g. Zara Jacket)",
+  "price_section": "Price (JD)",
+  "category_section": "Category",
+  "condition_section": "Condition",
+  "age_group_section": "Age Group",
+  "gender_section": "Gender",
+  "location_section": "Location",
+  "dropdown_hint": "Select",
+  "desc_section": "Description",
+  "desc_hint": "Describe your item...",
+  "no_photo_warning": "Please add at least one photo",
+  "success_message": "Item posted successfully!",
+  "error_prefix": "Error: ",
+  "post_button": "Post Item",
+  "required_validation": "Required",
+  "tap_to_upload": "Tap to upload photos"
+},
+  "explore_screen": {
+    "shop_by_category": "Shop by Category",
+    "shop_by_age": "Shop by Age",
+    "shop_by_gender": "Shop by Gender",
+    "shop_by_location": "Shop by Location",
+
+    "Newborn (0-3m)": "Newborn (0-3m)",
+    "Infant": "Infant",
+    "Toddler": "Toddler",
+    "Kids": "Kids",
+    "Junior": "Junior",
+
+    "0-3 months": "0-3 months",
+    "3-12 months": "3-12 months",
+    "1-3 years": "1-3 years",
+    "4-7 years": "4-7 years",
+    "8-12 years": "8-12 years"
+  },"filtered_products_screen": {
+  "error": "Error: ",
+  "no_items_found": "No items found for",
+  "no_title": "No Title",
+  "currency": "JOD"
+},"product_card": {
+  "no_title": "No Title",
+  "unknown_condition": "Unknown Condition",
+  "unknown_location": "Unknown Location",
+  "loading": "Loading...",
+  "unknown_seller": "Unknown Seller",
+  "currency_jd": "JD"
+},"date_helper": {
+  "just_now": "Just now",
+  "posted_days_ago": "Posted {days} days ago",
+  "posted_hours_ago": "Posted {hours} hrs ago",
+  "posted_minutes_ago": "Posted {minutes} mins ago"
+},"product_details_screen": {
+  "no_title": "No Title",
+  "unknown_location": "Unknown Location",
+  "unknown": "Unknown",
+  "no_description": "No description provided.",
+  "currency_jd": "JD",
+  "condition_label": "Condition",
+  "age_label": "Age",
+  "category_label": "Category",
+  "description_label": "Description",
+  "sold_by": "Sold by",
+  "loading": "Loading...",
+  "unknown_seller": "Unknown Seller",
+  "no_phone": "No phone provided",
+  "seller": "Seller",
+  "cannot_chat_with_self": "You cannot chat with yourself!",
+  "chat_with": "Chat with {name}"
+},"main_layout": {
+  "home": "Home",
+  "explore": "Explore",
+  "favorites": "Favorites",
+  "profile_title": "My Profile",
+  "profile_nav": "Profile"
+}
 }
