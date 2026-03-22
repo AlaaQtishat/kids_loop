@@ -22,13 +22,14 @@ class AuthManager {
 
     if (userCredential.user != null) {
       await userCredential.user!.updateDisplayName(name);
-
+      await userCredential.user!.reload();
       await _firestore.collection('users').doc(userCredential.user!.uid).set({
         'uid': userCredential.user!.uid,
         'full_name': name,
         'email': email,
         'phone_number': phone,
         'created_at': FieldValue.serverTimestamp(),
+        'photoUrl': "",
       });
     }
   }
