@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
-
-import '../../feature_screens/product_details_screen.dart';
+import 'package:kids_loop/bottom_navigation_pages/home_screen/product_details_screen.dart';
 
 class FilteredProductsScreen extends StatelessWidget {
   final String filterField;
   final String filterValue;
-
   const FilteredProductsScreen({
     super.key,
     required this.filterField,
@@ -17,11 +16,10 @@ class FilteredProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          filterValue,
+          "listing_options.$filterValue".tr(),
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             color: ThemeManager.primaryTeal,
@@ -37,6 +35,7 @@ class FilteredProductsScreen extends StatelessWidget {
             .where(filterField, isEqualTo: filterValue)
             .orderBy("createdAt", descending: true)
             .snapshots(),
+
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -45,21 +44,31 @@ class FilteredProductsScreen extends StatelessWidget {
           }
 
           if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
+            return Center(
+              child: Text(
+                "${'filtered_products_screen.error'.tr()}${snapshot.error}",
+              ),
+            );
           }
 
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
                   Icon(Icons.search_off, size: 80, color: theme.hintColor),
+
                   const SizedBox(height: 16),
+
                   Text(
-                    "No items found for '$filterValue'",
+                    "${'filtered_products_screen.no_items_found'.tr()} '${"listing_options.$filterValue".tr()}'",
+
                     style: TextStyle(
                       fontSize: 18,
+
                       color: theme.hintColor,
+
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -78,16 +87,16 @@ class FilteredProductsScreen extends StatelessWidget {
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
             ),
+
             itemCount: products.length,
             itemBuilder: (context, index) {
               final doc = products[index];
               final data = doc.data() as Map<String, dynamic>;
-
-              final String title = data['title'] ?? 'No Title';
+              final String title =
+                  data['title'] ?? 'filtered_products_screen.no_title'.tr();
               final String price = data['price']?.toString() ?? '0.0';
               final List images = data['images'] ?? [];
               final String imageUrl = images.isNotEmpty ? images[0] : "";
-
               return GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -98,6 +107,7 @@ class FilteredProductsScreen extends StatelessWidget {
                     ),
                   );
                 },
+
                 child: Container(
                   decoration: BoxDecoration(
                     color: theme.cardColor,
@@ -110,6 +120,7 @@ class FilteredProductsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -149,7 +160,7 @@ class FilteredProductsScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              "$price JOD",
+                              "$price ${'filtered_products_screen.currency'.tr()}",
                               style: const TextStyle(
                                 color: ThemeManager.primaryYellow,
                                 fontWeight: FontWeight.w900,

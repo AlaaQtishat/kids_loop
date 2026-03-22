@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/bottom_navigation_pages/explore_screen/filtered_products_screen.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
@@ -21,7 +22,7 @@ class ExploreScreen extends StatelessWidget {
   final List<Map<String, dynamic>> _ageGroupsData = [
     {
       "dbValue": "Newborn (0-3m)",
-      "title": "Newborn",
+      "title": "Newborn (0-3m)",
       "subtitle": "0-3 months",
       "icon": FontAwesomeIcons.babyCarriage,
     },
@@ -83,7 +84,7 @@ class ExploreScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildSectionTitle("Shop by Category"),
+            _buildSectionTitle("explore_screen.shop_by_category".tr()),
             const SizedBox(height: 16),
             SizedBox(
               height: 110,
@@ -113,7 +114,7 @@ class ExploreScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          cat["name"],
+                          "listing_options.${cat["name"]}".tr(),
                           style: const TextStyle(fontWeight: FontWeight.w600),
                         ),
                       ],
@@ -126,7 +127,7 @@ class ExploreScreen extends StatelessWidget {
             Divider(),
             const SizedBox(height: 15),
 
-            _buildSectionTitle("Shop by Age"),
+            _buildSectionTitle("explore_screen.shop_by_age".tr()),
             const SizedBox(height: 16),
             Wrap(
               spacing: 12,
@@ -178,7 +179,7 @@ class ExploreScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                age["title"],
+                                "explore_screen.${age["title"]}".tr(),
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
@@ -189,7 +190,7 @@ class ExploreScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                age["subtitle"],
+                                "explore_screen.${age["subtitle"]}".tr(),
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: theme.hintColor,
@@ -209,7 +210,7 @@ class ExploreScreen extends StatelessWidget {
             const SizedBox(height: 15),
             Divider(),
             const SizedBox(height: 15),
-            _buildSectionTitle("Shop by Gender"),
+            _buildSectionTitle("explore_screen.shop_by_gender".tr()),
             const SizedBox(height: 16),
             Row(
               children: _genders.map((gender) {
@@ -237,7 +238,7 @@ class ExploreScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            gender["name"],
+                            "listing_options.${gender["name"]}".tr(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: gender["color"],
@@ -253,7 +254,7 @@ class ExploreScreen extends StatelessWidget {
             const SizedBox(height: 15),
             Divider(),
             const SizedBox(height: 15),
-            _buildSectionTitle("Shop by Location"),
+            _buildSectionTitle("explore_screen.shop_by_location".tr()),
             const SizedBox(height: 16),
             SizedBox(
               height: 45,
@@ -284,7 +285,7 @@ class ExploreScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            loc,
+                            "listing_options.$loc".tr(),
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: theme.textTheme.bodyLarge?.color,
