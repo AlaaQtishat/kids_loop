@@ -17,7 +17,7 @@
     "success_message": "Account Created Successfully!",
     "fail_message": "Registration failed",
     "title": "Create Account",
-    "subtitle": "Sign up to get started!",
+    "subtitle": "Join the loop: share, save, and earn",
     "full_name_hint": "Full Name",
     "full_name_error": "*Full name is required",
     "email_hint": "Email",
@@ -59,7 +59,7 @@
     "email_hint": "Email",
     "email_error_empty": "*Email is required",
     "email_error_invalid": "Please enter a valid email (e.g. name@example.com)",
-    "send_button": "SEND RESET LINK"
+    "send_button": "Send Reset Link"
   },
   "home_screen": {
     "home_error": "Error: ",
@@ -177,5 +177,88 @@
   "favorites": "Favorites",
   "profile_title": "My Profile",
   "profile_nav": "Profile"
+},
+  "favorites_screen": {
+    "empty_wishlist": "Your wishlist is empty"
+  },"favorite_item_card": {
+  "no_title": "No Title",
+  "sold": "SOLD",
+  "currency": "JOD",
+  "remove_title": "Remove from Favorites?",
+  "remove_content": "Are you sure you want to remove this item from your favorites?",
+  "cancel": "Cancel",
+  "yes": "Yes"
+},"profile_screen": {
+  "loading_name": "Loading...",
+  "loading_number": "Loading...",
+  "default_member_name": "KidsLoop Member",
+  "no_number": "No number",
+  "error_loading_name": "Error loading name",
+  "error_loading_number": "Error loading number",
+  "profile_pic_updated": "Profile picture updated!",
+  "error_uploading_image": "Error uploading image: ",
+  "change_phone_title": "Change Phone Number",
+  "phone_empty_error": "Please enter a phone number",
+  "invalid_jordanian_number": "Invalid Jordanian number",
+  "cancel": "Cancel",
+  "save": "Save",
+  "phone_updated": "Phone number updated successfully!",
+  "error_prefix": "Error: ",
+  "my_listings": "My Listings",
+  "manage_items": "Manage your items for sale",
+  "settings": "Settings",
+  "language": "Language",
+  "dark_mode": "Dark Mode",
+  "log_out": "Log Out",
+  "log_out_content": "Are you sure you want to log out?",
+  "no_email": "No email linked",
+  "change_button": "Change"
+},"chat_list_screen": {
+  "title": "Chats",
+  "error_fetching": "Error fetching chats",
+  "no_messages": "No messages yet.",
+  "you_prefix": "You: ",
+  "default_user": "KidsLoop User"
+},"chat_screen": {
+  "error_fetching": "Error fetching messages",
+  "say_hi": "Say hi! 👋",
+  "type_message": "Type a message...",
+  "currency": "JD",
+  "am": "AM",
+  "pm": "PM"
+},"my_listings_screen": {
+  "title": "My Listings",
+  "error_prefix": "Error: ",
+  "no_listings": "No listings found",
+  "no_title": "No Title",
+  "currency": "JOD",
+  "sold_badge": "SOLD",
+  "mark_sold": "Mark as Sold",
+  "mark_available": "Mark as Available",
+  "edit": "Edit",
+  "delete": "Delete",
+  "delete_title": "Delete Listing?",
+  "delete_content": "Are you sure you want to permanently delete this item?",
+  "cancel": "Cancel",
+  "delete_success": "Item deleted successfully",
+  "mark_sold_title": "Mark as Sold?",
+  "make_available_title": "Make Available?",
+  "mark_sold_content": "Are you sure this item is sold? people won't be able to see it anymore.",
+  "make_available_content": "Do you want to put this item back for sale?",
+  "confirm": "Confirm"
+},"edit_product_screen": {
+  "title": "Edit Listing",
+  "title_label": "Title",
+  "price_label": "Price (JOD)",
+  "location_label": "Location",
+  "category_label": "Category",
+  "condition_label": "Condition",
+  "age_group_label": "Age Group",
+  "gender_label": "Gender",
+  "description_label": "Description",
+  "save_changes": "Save Changes",
+  "success_message": "Listing updated successfully!",
+  "error_prefix": "Error updating: ",
+  "required": "Required"
 }
 }
