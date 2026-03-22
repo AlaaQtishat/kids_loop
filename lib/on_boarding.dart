@@ -50,7 +50,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ];
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: ThemeManager.backgroundGrey,
+      //  backgroundColor: ThemeManager.backgroundGrey,
       body: Stack(
         children: [
           Positioned(
