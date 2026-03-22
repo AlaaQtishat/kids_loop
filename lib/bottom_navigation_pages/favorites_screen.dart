@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
@@ -14,16 +15,7 @@ class FavoritesScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text(
-          "My Favorites",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: ThemeManager.primaryTeal,
-          ),
-        ),
-        centerTitle: true,
-      ),
+
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('users')
@@ -50,7 +42,7 @@ class FavoritesScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    "Your wishlist is empty",
+                    "favorites_screen.empty_wishlist".tr(),
                     style: TextStyle(
                       fontSize: 18,
                       color: theme.hintColor,
