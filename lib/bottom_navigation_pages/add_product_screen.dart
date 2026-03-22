@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -42,10 +43,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
       if (images.length > availableSlots && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              "You can only select up to 3 images. Extra images were ignored.",
-            ),
+          SnackBar(
+            content: Text("add_product_screen.image_limit_warning".tr()),
           ),
         );
       }
@@ -70,8 +69,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Sell an Item",
+        title: Text(
+          "add_product_screen.app_bar_title".tr(),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: ThemeManager.primaryTeal,
@@ -90,7 +89,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSectionTitle("Photos (Up to 3)"),
+              _buildSectionTitle("add_product_screen.photos_section".tr()),
 
               _selectedImages.isEmpty
                   ? GestureDetector(
@@ -104,10 +103,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
               const SizedBox(height: 24),
 
-              _buildSectionTitle("Title"),
+              _buildSectionTitle("add_product_screen.title_section".tr()),
               _buildTextField(
                 controller: _titleController,
-                hint: "What are you selling? (e.g. Zara Jacket)",
+                hint: "add_product_screen.title_hint".tr(),
                 icon: Icons.title,
               ),
 
@@ -117,7 +116,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildSectionTitle("Price (JD)"),
+                        _buildSectionTitle(
+                          "add_product_screen.price_section".tr(),
+                        ),
                         _buildTextField(
                           controller: _priceController,
                           hint: "0.00",
@@ -132,9 +133,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildSectionTitle("Category"),
+                        _buildSectionTitle(
+                          "add_product_screen.category_section".tr(),
+                        ),
                         _buildDropdown(
-                          hint: "Select",
+                          hint: "add_product_screen.dropdown_hint".tr(),
                           value: _selectedCategory,
                           items: ListingOptions.categories,
                           onChanged: (val) =>
@@ -152,9 +155,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildSectionTitle("Condition"),
+                        _buildSectionTitle(
+                          "add_product_screen.condition_section".tr(),
+                        ),
                         _buildDropdown(
-                          hint: "Select",
+                          hint: "add_product_screen.dropdown_hint".tr(),
                           value: _selectedCondition,
                           items: ListingOptions.conditions,
                           onChanged: (val) =>
@@ -168,9 +173,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildSectionTitle("Age Group"),
+                        _buildSectionTitle(
+                          "add_product_screen.age_group_section".tr(),
+                        ),
                         _buildDropdown(
-                          hint: "Select",
+                          hint: "add_product_screen.dropdown_hint".tr(),
                           value: _selectedAgeGroup,
                           items: ListingOptions.ageGroups,
                           onChanged: (val) =>
@@ -188,9 +195,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildSectionTitle("Gender"),
+                        _buildSectionTitle(
+                          "add_product_screen.gender_section".tr(),
+                        ),
                         _buildDropdown(
-                          hint: "Select",
+                          hint: "add_product_screen.dropdown_hint".tr(),
                           value: _selectedGender,
                           items: ListingOptions.genders,
                           onChanged: (val) =>
@@ -204,9 +213,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildSectionTitle("Location"),
+                        _buildSectionTitle(
+                          "add_product_screen.location_section".tr(),
+                        ),
                         _buildDropdown(
-                          hint: "Select",
+                          hint: "add_product_screen.dropdown_hint".tr(),
                           value: _selectedLocation,
                           items: ListingOptions.locations,
                           onChanged: (val) =>
@@ -218,10 +229,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 ],
               ),
 
-              _buildSectionTitle("Description"),
+              _buildSectionTitle("add_product_screen.desc_section".tr()),
               _buildTextField(
                 controller: _descController,
-                hint: "Describe your item...",
+                hint: "add_product_screen.desc_hint".tr(),
                 icon: Icons.description_outlined,
                 maxLines: 4,
               ),
@@ -237,9 +248,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       : () async {
                           if (_selectedImages.isEmpty) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Please add at least one photo"),
-                                backgroundColor: Colors.redAccent,
+                              SnackBar(
+                                content: Text(
+                                  "add_product_screen.no_photo_warning".tr(),
+                                ),
+                                backgroundColor: ThemeManager.errorRed,
                               ),
                             );
                             return;
@@ -308,10 +321,10 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               if (mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: const Text(
-                                      "Item posted successfully! ",
+                                    content: Text(
+                                      "add_product_screen.success_message".tr(),
                                     ),
-                                    backgroundColor: Colors.grey[900],
+                                    backgroundColor: ThemeManager.successGreen,
                                   ),
                                 );
 
@@ -333,7 +346,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
                               if (mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text("Error: $e"),
+                                    content: Text(
+                                      "${'add_product_screen.error_prefix'.tr()}$e",
+                                    ),
                                     backgroundColor: ThemeManager.errorRed,
                                   ),
                                 );
@@ -356,8 +371,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             strokeWidth: 2.5,
                           ),
                         )
-                      : const Text(
-                          "Post Item",
+                      : Text(
+                          "add_product_screen.post_button".tr(),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -391,7 +406,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
-      validator: (value) => value == null || value.isEmpty ? "Required" : null,
+      validator: (value) => value == null || value.isEmpty
+          ? "add_product_screen.required_validation".tr()
+          : null,
       decoration: InputDecoration(
         hintText: hint,
         prefixIcon: maxLines == 1 ? Icon(icon) : null,
@@ -415,12 +432,16 @@ class _AddProductScreenState extends State<AddProductScreen> {
           .map(
             (item) => DropdownMenuItem(
               value: item,
-              child: Text(item, overflow: TextOverflow.ellipsis),
+              child: Text(
+                "listing_options.$item".tr(),
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           )
           .toList(),
       onChanged: onChanged,
-      validator: (value) => value == null ? "Required" : null,
+      validator: (value) =>
+          value == null ? "add_product_screen.required_validation".tr() : null,
       decoration: InputDecoration(hintText: hint),
       icon: Icon(
         Icons.keyboard_arrow_down_rounded,
@@ -455,7 +476,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           if (height > 150) ...[
             const SizedBox(height: 10),
             Text(
-              "Tap to upload photos",
+              "add_product_screen.tap_to_upload".tr(),
               style: TextStyle(color: theme.hintColor),
             ),
           ],
