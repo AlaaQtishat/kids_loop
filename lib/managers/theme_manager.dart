@@ -6,7 +6,7 @@ class ThemeManager {
   static const Color backgroundGrey = Color(0xFFF5F5F5);
   static const Color darkBackground = Color(0xFF121212);
   static const Color darkCard = Color(0xFF1E1E1E);
-  static const Color errorRed = Colors.redAccent;
+  static const Color errorRed = Colors.red;
   static const Color successGreen = Colors.green;
 
   static const TextTheme _lightTextTheme = TextTheme(
