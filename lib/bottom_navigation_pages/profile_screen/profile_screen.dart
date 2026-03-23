@@ -221,7 +221,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text("profile_screen.phone_updated".tr()),
-                            backgroundColor: Colors.green,
+                            backgroundColor: ThemeManager.successGreen,
                           ),
                         );
                       }
@@ -235,7 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           content: Text(
                             "${'profile_screen.error_prefix'.tr()}$e",
                           ),
-                          backgroundColor: Colors.redAccent,
+                          backgroundColor: ThemeManager.errorRed,
                         ),
                       );
                     }
@@ -374,11 +374,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Divider(height: 1, indent: 20, endIndent: 20),
 
                   ListTile(
-                    leading: const Icon(Icons.logout, color: Colors.redAccent),
+                    leading: const Icon(
+                      Icons.logout,
+                      color: ThemeManager.errorRed,
+                    ),
                     title: Text(
                       "profile_screen.log_out".tr(),
                       style: TextStyle(
-                        color: Colors.redAccent,
+                        color: ThemeManager.errorRed,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
