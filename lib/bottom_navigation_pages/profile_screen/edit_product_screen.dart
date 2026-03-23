@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:kids_loop/utilities/listing_options.dart';
@@ -75,8 +76,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
       if (mounted) {
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Listing updated successfully!"),
+          SnackBar(
+            content: Text("edit_product_screen.success_message".tr()),
             backgroundColor: ThemeManager.successGreen,
           ),
         );
@@ -85,7 +86,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Error updating: $e"),
+            content: Text("${'edit_product_screen.error_prefix'.tr()}$e"),
             backgroundColor: ThemeManager.errorRed,
           ),
         );
@@ -99,8 +100,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Edit Listing",
+        title: Text(
+          "edit_product_screen.title".tr(),
           style: TextStyle(color: ThemeManager.primaryTeal),
         ),
         centerTitle: true,
@@ -114,11 +115,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
             children: [
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(
-                  labelText: "Title",
+                decoration: InputDecoration(
+                  labelText: "edit_product_screen.title_label".tr(),
                   border: OutlineInputBorder(),
                 ),
-                validator: (val) => val!.isEmpty ? "Required" : null,
+                validator: (val) =>
+                    val!.isEmpty ? "edit_product_screen.required".tr() : null,
               ),
               const SizedBox(height: 16),
 
@@ -128,17 +130,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     child: TextFormField(
                       controller: _priceController,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        labelText: "Price (JOD)",
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        labelText: "edit_product_screen.price_label".tr(),
+                        border: const OutlineInputBorder(),
                       ),
-                      validator: (val) => val!.isEmpty ? "Required" : null,
+                      validator: (val) => val!.isEmpty
+                          ? "edit_product_screen.required".tr()
+                          : null,
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: _buildDropdown(
-                      label: "Location",
+                      label: "edit_product_screen.location_label".tr(),
                       value: _selectedLocation,
                       items: ListingOptions.locations,
                       onChanged: (val) =>
@@ -153,7 +157,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 children: [
                   Expanded(
                     child: _buildDropdown(
-                      label: "Category",
+                      label: "edit_product_screen.category_label".tr(),
                       value: _selectedCategory,
                       items: ListingOptions.categories,
                       onChanged: (val) =>
@@ -163,7 +167,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: _buildDropdown(
-                      label: "Condition",
+                      label: "edit_product_screen.condition_label".tr(),
                       value: _selectedCondition,
                       items: ListingOptions.conditions,
                       onChanged: (val) =>
@@ -178,7 +182,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 children: [
                   Expanded(
                     child: _buildDropdown(
-                      label: "Age Group",
+                      label: "edit_product_screen.age_group_label".tr(),
                       value: _selectedAgeGroup,
                       items: ListingOptions.ageGroups,
                       onChanged: (val) =>
@@ -188,7 +192,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   const SizedBox(width: 16),
                   Expanded(
                     child: _buildDropdown(
-                      label: "Gender",
+                      label: "edit_product_screen.gender_label".tr(),
                       value: _selectedGender,
                       items: ListingOptions.genders,
                       onChanged: (val) =>
@@ -202,8 +206,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
               TextFormField(
                 controller: _descController,
                 maxLines: 4,
-                decoration: const InputDecoration(
-                  labelText: "Description",
+                decoration: InputDecoration(
+                  labelText: "edit_product_screen.description_label".tr(),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -219,8 +223,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   onPressed: _isUpdating ? null : _updateProduct,
                   child: _isUpdating
                       ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text(
-                          "Save Changes",
+                      : Text(
+                          "edit_product_screen.save_changes".tr(),
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                 ),
@@ -250,14 +254,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
         return DropdownMenuItem(
           value: item,
           child: Text(
-            item,
+            "listing_options.$item".tr(),
             style: const TextStyle(fontSize: 14),
             overflow: TextOverflow.ellipsis,
           ),
         );
       }).toList(),
       onChanged: onChanged,
-      validator: (val) => val == null ? "Required" : null,
+      validator: (val) =>
+          val == null ? "edit_product_screen.required".tr() : null,
     );
   }
 }
