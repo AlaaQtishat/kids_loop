@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:kids_loop/feature_screens/chat_screen/chat_screen.dart';
+import 'package:kids_loop/utilities/app_keys.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../bottom_navigation_pages/chat_screen/chat_screen.dart';
-import '../utilities/app_keys.dart';
 
 class NotificationHandler {
-  static String? notificationPayloadId;
-  static String? notificationPayloadName;
+  static String? pendingChatId;
+  static String? pendingChatName;
 
   static Future<void> initialize() async {
-    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
     OneSignal.initialize(AppKeys.oneSignalAppId);
     OneSignal.Notifications.requestPermission(true);
 
     OneSignal.Notifications.addClickListener((event) {
       final data = event.notification.additionalData;
       if (data != null && data['senderId'] != null) {
-        notificationPayloadId = data['senderId'];
-        notificationPayloadName = data['senderName'];
+        pendingChatId = data['senderId'];
+        pendingChatName = data['senderName'];
       }
     });
 
@@ -33,8 +32,8 @@ class NotificationHandler {
     OneSignal.Notifications.addClickListener((event) {
       final data = event.notification.additionalData;
       if (data != null && data['senderId'] != null) {
-        notificationPayloadId = data['senderId'];
-        notificationPayloadName = data['senderName'];
+        pendingChatId = data['senderId'];
+        pendingChatName = data['senderName'];
         _handleNotificationNavigation(context);
       }
     });
@@ -42,12 +41,12 @@ class NotificationHandler {
 
   static void _handleNotificationNavigation(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (notificationPayloadId != null) {
-        String chatId = notificationPayloadId!;
-        String chatName = notificationPayloadName ?? "User";
+      if (pendingChatId != null) {
+        String chatId = pendingChatId!;
+        String chatName = pendingChatName ?? "User";
 
-        notificationPayloadId = null;
-        notificationPayloadName = null;
+        pendingChatId = null;
+        pendingChatName = null;
 
         Navigator.push(
           context,
