@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:kids_loop/widgets/product_card.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -46,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     if (snapshot.hasError) {
                       return SliverToBoxAdapter(
-                        child: Center(child: Text("Error: ${snapshot.error}")),
+                        child: Text(
+                          "${'home_screen.home_error'.tr()}${snapshot.error}",
+                        ),
                       );
                     }
 
@@ -56,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(top: 50.0),
                           child: Center(
                             child: Text(
-                              "No items available yet.",
+                              "home_screen.home_no_items".tr(),
                               style: TextStyle(color: theme.hintColor),
                             ),
                           ),
@@ -76,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.only(top: 50.0),
                           child: Center(
                             child: Text(
-                              "No new items from others yet.",
+                              "home_screen.home_no_other_items".tr(),
                               style: TextStyle(color: theme.hintColor),
                             ),
                           ),
