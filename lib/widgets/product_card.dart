@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:provider/provider.dart';
-import '../feature_screens/product_details_screen.dart';
-import '../services/favorite_provider.dart';
+import 'package:kids_loop/bottom_navigation_pages/home_screen/product_details_screen.dart';
+import 'package:kids_loop/services/favorite_provider.dart';
 import 'package:kids_loop/utilities/date_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProductCard extends StatelessWidget {
   final Map<String, dynamic> data;
@@ -15,12 +16,35 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final title = data['title'] ?? 'No Title';
+
+    final title = data['title'] ?? 'product_card.no_title'.tr();
     final price = data['price']?.toString() ?? '0.00';
-    final condition = data['condition'] ?? 'Unknown Condition';
-    final category = data['category'];
-    final ageGroup = data['ageGroup'];
-    final location = data['location'] ?? 'Unknown Location';
+
+    final rawCondition = data['condition'];
+    final condition = rawCondition != null
+        ? "listing_options.$rawCondition".tr()
+        : 'product_card.unknown_condition'.tr();
+
+    final rawCategory = data['category'];
+    final category = rawCategory != null
+        ? "listing_options.$rawCategory".tr()
+        : '';
+
+    final rawAgeGroup = data['ageGroup'];
+    final ageGroup = rawAgeGroup != null
+        ? "listing_options.$rawAgeGroup".tr()
+        : '';
+
+    final rawLocation = data['location'];
+    final location = rawLocation != null
+        ? "listing_options.$rawLocation".tr()
+        : 'product_card.unknown_location'.tr();
+
+    final rawGender = data['gender'];
+    final genderTranslated = rawGender != null
+        ? "listing_options.$rawGender".tr()
+        : '';
+
     final timeAgo = DateHelper.getTimeAgo(data['createdAt']);
     final String sellerUid = data['userUid'] ?? '';
 
@@ -28,6 +52,7 @@ class ProductCard extends StatelessWidget {
     final String mainImageUrl = images.isNotEmpty
         ? images[0]
         : "https://dummyimage.com/400x400/cccccc/000000&text=No+Image";
+    "https://dummyimage.com/400x400/cccccc/000000&text=No+Image";
 
     return GestureDetector(
       onTap: () {
@@ -63,7 +88,7 @@ class ProductCard extends StatelessWidget {
                     .doc(sellerUid)
                     .get(),
                 builder: (context, userSnapshot) {
-                  String sellerName = "Loading...";
+                  String sellerName = "product_card.loading".tr();
                   String sellerImageUrl = "";
 
                   if (userSnapshot.connectionState == ConnectionState.done &&
@@ -71,7 +96,9 @@ class ProductCard extends StatelessWidget {
                       userSnapshot.data!.exists) {
                     final userData =
                         userSnapshot.data!.data() as Map<String, dynamic>;
-                    sellerName = userData['full_name'] ?? "Unknown Seller";
+                    sellerName =
+                        userData['full_name'] ??
+                        "product_card.unknown_seller".tr();
                     sellerImageUrl = userData['photoUrl'] ?? "";
                   }
 
@@ -197,7 +224,7 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "$price JD",
+                        "$price ${'product_card.currency_jd'.tr()}",
                         style: const TextStyle(
                           color: ThemeManager.primaryYellow,
                           fontWeight: FontWeight.w900,
@@ -205,9 +232,22 @@ class ProductCard extends StatelessWidget {
                         ),
                       ),
                       const Spacer(),
-                      Text(
-                        " $location",
-                        style: TextStyle(color: theme.hintColor, fontSize: 11),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            size: 16,
+                            color: theme.hintColor,
+                          ),
+                          const SizedBox(width: 1),
+                          Text(
+                            " $location",
+                            style: TextStyle(
+                              color: theme.hintColor,
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -217,22 +257,25 @@ class ProductCard extends StatelessWidget {
                     style: theme.textTheme.titleMedium?.copyWith(fontSize: 16),
                   ),
                   const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      _buildSpecChip(theme, Icons.child_care, ageGroup),
-                      const SizedBox(width: 8),
-                      _buildSpecChip(theme, Icons.checkroom, category),
-                      const SizedBox(width: 8),
-                      _buildSpecChip(
-                        theme,
-                        data['gender'] == "Boy"
-                            ? Icons.male
-                            : data['gender'] == "Girl"
-                            ? Icons.female
-                            : Icons.all_inclusive,
-                        data['gender'] ?? "neutral",
-                      ),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        _buildSpecChip(theme, Icons.child_care, ageGroup),
+                        const SizedBox(width: 8),
+                        _buildSpecChip(theme, Icons.checkroom, category),
+                        const SizedBox(width: 8),
+                        _buildSpecChip(
+                          theme,
+                          rawGender == "Boy"
+                              ? Icons.male
+                              : rawGender == "Girl"
+                              ? Icons.female
+                              : Icons.all_inclusive,
+                          genderTranslated,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
