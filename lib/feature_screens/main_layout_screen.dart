@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:kids_loop/bottom_navigation_pages/home_screen/home_screen.dart';
 import 'package:kids_loop/feature_screens/chat_screen/chat_list_screen.dart';
 import 'package:kids_loop/bottom_navigation_pages/favorites_screen.dart';
 import 'package:kids_loop/bottom_navigation_pages/profile_screen/profile_screen.dart';
@@ -8,7 +9,6 @@ import 'package:kids_loop/services/favorite_provider.dart';
 import 'package:kids_loop/services/notification_handler.dart';
 import 'package:kids_loop/bottom_navigation_pages/add_product_screen.dart';
 import 'package:kids_loop/bottom_navigation_pages/explore_screen/explore_screen.dart';
-import 'package:kids_loop/home_screen/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
