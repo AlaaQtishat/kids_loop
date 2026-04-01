@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:kids_loop/services/favorite_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
-import '../feature_screens/product_details_screen.dart';
+import 'package:kids_loop/bottom_navigation_pages/home_screen/product_details_screen.dart';
 
 class FavoriteItemCard extends StatelessWidget {
   final String productId;
@@ -26,7 +27,8 @@ class FavoriteItemCard extends StatelessWidget {
         if (!doc.exists) return const SizedBox.shrink();
 
         final data = doc.data() as Map<String, dynamic>;
-        final String title = data['title'] ?? 'No Title';
+        final String title =
+            data['title'] ?? 'favorite_item_card.no_title'.tr();
         final String price = data['price']?.toString() ?? '0.0';
         final List images = data['images'] ?? [];
         final String imageUrl = images.isNotEmpty ? images[0] : "";
@@ -104,10 +106,10 @@ class FavoriteItemCard extends StatelessWidget {
                 color: Colors.black.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "SOLD",
-                  style: TextStyle(
+                  "favorite_item_card.sold".tr(),
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
@@ -137,7 +139,7 @@ class FavoriteItemCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            "$price JOD",
+            "$price ${'favorite_item_card.currency'.tr()}",
             style: const TextStyle(
               color: ThemeManager.primaryYellow,
               fontWeight: FontWeight.w900,
@@ -164,21 +166,19 @@ class FavoriteItemCard extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
-              title: const Text(
-                "Remove from Favorites?",
+              title: Text(
+                "favorite_item_card.remove_title".tr(),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: ThemeManager.primaryTeal,
                 ),
               ),
-              content: const Text(
-                "Are you sure you want to remove this item from your favorites?",
-              ),
+              content: Text("favorite_item_card.remove_content".tr()),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(dialogContext).pop(),
-                  child: const Text(
-                    "Cancel",
+                  child: Text(
+                    "favorite_item_card.cancel".tr(),
                     style: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.bold,
@@ -203,7 +203,7 @@ class FavoriteItemCard extends StatelessWidget {
                         productId,
                       );
                     },
-                    child: const Text("Yes"),
+                    child: Text("favorite_item_card.yes".tr()),
                   ),
                 ),
               ],
