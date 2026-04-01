@@ -66,83 +66,79 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ThemeManager.backgroundGrey,
-      appBar: AppBar(
-        backgroundColor: ThemeManager.backgroundGrey,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: ThemeManager.primaryTeal),
-      ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 80),
+      appBar: AppBar(),
+      body: SafeArea(
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 100),
+                Image.asset("assets/images/logo2.png", height: 150),
 
-              Image.asset("assets/images/logo2.png", height: 150),
-
-              Text(
-                "forgot_password_screen.title".tr(),
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: ThemeManager.primaryTeal,
+                Text(
+                  "forgot_password_screen.title".tr(),
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: ThemeManager.primaryTeal,
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 12),
+                const SizedBox(height: 12),
 
-              Text(
-                "forgot_password_screen.subtitle".tr(),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
+                Text(
+                  "forgot_password_screen.subtitle".tr(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
 
-              const SizedBox(height: 32),
+                const SizedBox(height: 32),
 
-              CustomTextField(
-                hint: "forgot_password_screen.email_hint".tr(),
-                prefixIcon: Icons.email,
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                validator: (val) {
-                  if (val == null || val.isEmpty) {
-                    return "forgot_password_screen.email_error_empty".tr();
-                  }
-                  final bool emailValid = RegExp(
-                    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                  ).hasMatch(val);
+                CustomTextField(
+                  hint: "forgot_password_screen.email_hint".tr(),
+                  prefixIcon: Icons.email,
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return "forgot_password_screen.email_error_empty".tr();
+                    }
+                    final bool emailValid = RegExp(
+                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                    ).hasMatch(val);
 
-                  if (!emailValid) {
-                    return "forgot_password_screen.email_error_invalid".tr();
-                  }
+                    if (!emailValid) {
+                      return "forgot_password_screen.email_error_invalid".tr();
+                    }
 
-                  return null;
-                },
-              ),
+                    return null;
+                  },
+                ),
 
-              const SizedBox(height: 32),
+                const SizedBox(height: 32),
 
-              SizedBox(
-                width: double.infinity,
-                height: 55,
-                child: ElevatedButton(
-                  onPressed: isLoading ? null : _performReset,
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: isLoading ? null : _performReset,
 
-                  child: isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : Text(
-                          "forgot_password_screen.send_button".tr(),
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                    child: isLoading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : Text(
+                            "forgot_password_screen.send_button".tr(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
