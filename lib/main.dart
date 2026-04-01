@@ -1,12 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:kids_loop/services/favorite_provider.dart';
 import 'package:kids_loop/services/notification_handler.dart';
 import 'package:kids_loop/splash_screen.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'services/theme_provider.dart';
@@ -29,7 +27,7 @@ Future<void> main() async {
       supportedLocales: [Locale('en'), Locale('ar')],
       path: 'assets/translations',
       fallbackLocale: Locale('en'),
-      startLocale: Locale('ar'),
+      useOnlyLangCode: true,
       saveLocale: true,
       child: MultiProvider(
         providers: [
