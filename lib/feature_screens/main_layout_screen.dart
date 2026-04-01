@@ -1,14 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:kids_loop/bottom_navigation_pages/chat_screen/chat_list_screen.dart';
+import 'package:kids_loop/feature_screens/chat_screen/chat_list_screen.dart';
 import 'package:kids_loop/bottom_navigation_pages/favorites_screen.dart';
 import 'package:kids_loop/bottom_navigation_pages/profile_screen/profile_screen.dart';
 import 'package:kids_loop/managers/theme_manager.dart';
 import 'package:kids_loop/services/favorite_provider.dart';
 import 'package:kids_loop/services/notification_handler.dart';
-import '../bottom_navigation_pages/add_product_screen.dart';
-import '../bottom_navigation_pages/explore_screen/explore_screen.dart';
-import '../bottom_navigation_pages/home_screen.dart';
+import 'package:kids_loop/bottom_navigation_pages/add_product_screen.dart';
+import 'package:kids_loop/bottom_navigation_pages/explore_screen/explore_screen.dart';
+import 'package:kids_loop/home_screen/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +50,11 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? ThemeManager.primaryTeal.withOpacity(0.15)
+            : ThemeManager.backgroundGrey,
         toolbarHeight: 60.0,
+
         centerTitle: _currentIndex == 0 ? false : true,
         title: _currentIndex == 0
             ? Row(
@@ -93,7 +97,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
                         child: IconButton(
                           icon: Icon(
                             Icons.forum_outlined,
-                            color: Colors.grey.shade600,
+                            color: ThemeManager.primaryTeal,
                             size: 32,
                           ),
                           onPressed: () {
@@ -115,7 +119,7 @@ class _MainLayoutScreenState extends State<MainLayoutScreen> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  color: theme.primaryColor,
+                  color: ThemeManager.primaryTeal,
                 ),
               ),
       ),
