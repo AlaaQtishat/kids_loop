@@ -25,9 +25,7 @@ class FavoritesProvider extends ChangeNotifier {
         _favoriteIds.add(doc.id);
       }
       notifyListeners();
-    } catch (e) {
-      debugPrint("Error fetching favorites: $e");
-    }
+    } catch (_) {}
   }
 
   bool isFavorite(String productId) {
@@ -65,14 +63,13 @@ class FavoritesProvider extends ChangeNotifier {
           'addedAt': FieldValue.serverTimestamp(),
         });
       }
-    } catch (e) {
+    } catch (_) {
       if (isExist) {
         _favoriteIds.add(productId);
       } else {
         _favoriteIds.remove(productId);
       }
       notifyListeners();
-      debugPrint("Error toggling favorite: $e");
     }
   }
 
