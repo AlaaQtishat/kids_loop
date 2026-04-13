@@ -2,7 +2,7 @@
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/580f6e2d-33fb-4278-b897-8bdf4b4d1c93" alt="KidsLoop Logo" width="150"/>
-  <h3>Smart Marketplace for Pre-loved Kids' Items</h3>
+  <h3>connecting local parents, making it easy to buy and sell gently used kids' clothes and items.</h3>
   <p>Save money, protect the environment, and refresh your kids' wardrobe intelligently!</p>
 </div>
 
